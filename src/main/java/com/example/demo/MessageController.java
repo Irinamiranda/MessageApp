@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -79,6 +80,23 @@ public class MessageController {
 
         messageRepository.save(message);
         return "redirect:/messages";
+    }
+    @RequestMapping("/detail/{id}")
+    public String showMessage(@PathVariable("id") long id, Model model){
+        model.addAttribute("message", messageRepository.findById(id).get());
+        return "show";
+    }
+
+    @RequestMapping("/update/{id}")
+    public String updateMessage(@PathVariable("id") long id, Model model){
+        model.addAttribute("message", messageRepository.findById(id));
+        return "addMessage";
+    }
+
+    @RequestMapping("/delete/{id}")
+    public String delMessage(@PathVariable("id") long id){
+        messageRepository.deleteById(id);
+        return "redirect:/messageList";
     }
 
 }
