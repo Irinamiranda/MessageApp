@@ -89,7 +89,7 @@ public class MessageController {
 
     @RequestMapping("/update/{id}")
     public String updateMessage(@PathVariable("id") long id, Model model, Principal principal){
-        model.addAttribute("message", userRepository.findByUsername(principal.getName()));
+        model.addAttribute("user", userRepository.findByUsername(principal.getName()));
         model.addAttribute("message", messageRepository.findById(id).get());
         return "addMessage";
     }
@@ -97,7 +97,7 @@ public class MessageController {
     @RequestMapping("/delete/{id}")
     public String delMessage(@PathVariable("id") long id){
         messageRepository.deleteById(id);
-        return "redirect:/messageList";
+        return "redirect:/messages";
     }
 
 }
