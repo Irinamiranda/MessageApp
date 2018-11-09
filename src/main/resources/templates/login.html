@@ -29,7 +29,22 @@
     </nav>
 </div>
 
-<div class="container bg-light">
+<h1>Login Page</h1>
+<div th:if="${param.error}">
+    Invalid username or password
+</div>
+<div th:if="${param.logout}">
+    You have been logged out
+</div>
+<form th:action="@{/login}" method="post">
+    <div><label>User name: <input type="text" name="username"/></label></div>
+    <div><label>Password: <input type="password" name="password"/></label></div>
+    <div><input type="submit" value="Sign in"/></div>
+
+</form>
+<a href="/register">New User</a><br/>
+
+<!--<div class="container bg-light">
     <h2>Login Information</h2>
 
     <div th:if="${param.error}" class="alert alert-danger" role="alert">
@@ -52,8 +67,8 @@
 
         <button type="submit" class="btn btn-primary">Sign In</button>
     </form>
-</div>
-
+</div>-->
+<div th:replace="base :: footer"></div>
 <footer class="navbar navbar navbar-expand-lg navbar-light bg-dark fixed-bottom">
     <span class="mr-auto"></span>
     <div class="text-muted">
