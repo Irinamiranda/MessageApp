@@ -27,7 +27,8 @@ public class MessageController {
     MessageRepository messageRepository;
 
     @RequestMapping("/")
-    public String index() {
+    public String index(Model model) {
+        model.addAttribute("messages", messageRepository.findAll());
         return "index";
     }
 

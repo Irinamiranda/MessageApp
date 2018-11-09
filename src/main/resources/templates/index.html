@@ -39,9 +39,35 @@
 </div>
 
 <h2>Welcome to Messaging Application!</h2>
-
 <div th:if="${param.logout}" class="alert alert-info" role="alert">
     You have been logged out
+</div>
+<div class="container">
+    <h2 class="text-center py-3 pl-4 pr-5">List of Messages</h2>
+    <div align="center">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Content</th>
+                <th scope="col">Sent By</th>
+                <th scope="col">Date</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="message: ${messages}">
+                <td th:text="${message.text}"></td>
+                <td th:text="${message.sentBy}"></td>
+                <td th:text="${message.date}"></td>
+                <td>
+
+                    <a th:href="@{/detail/{id}(id=${message.id})}">Details</a> -
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <a href = "/login">Login</a>
