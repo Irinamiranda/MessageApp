@@ -75,7 +75,7 @@ public class MessageController {
     @PostMapping("/processMessage")
     public String processMessage(@Valid Message message, BindingResult result) {
         if (result.hasErrors()) {
-            return "processMessage";
+            return "addMessage";
         }
 
         messageRepository.save(message);
@@ -88,8 +88,9 @@ public class MessageController {
     }
 
     @RequestMapping("/update/{id}")
-    public String updateMessage(@PathVariable("id") long id, Model model){
-        model.addAttribute("message", messageRepository.findById(id));
+    public String updateMessage(@PathVariable("id") long id, Model model, Principal principal){
+        model.addAttribute("message", userRepository.findByUsername(principal.getName()));
+        model.addAttribute("message", messageRepository.findById(id).get());
         return "addMessage";
     }
 
