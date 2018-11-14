@@ -52,7 +52,7 @@ public class MessageController {
     @PostMapping("/processUser")
     public String processUser(@Valid User user, BindingResult result) {
         if (result.hasErrors()) {
-            return "processUser";
+            return "addUser";
         }
 
         Role userRole = roleRepository.findByRole("USER");

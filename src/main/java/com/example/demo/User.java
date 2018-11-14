@@ -3,6 +3,7 @@ package com.example.demo;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 
 @Entity
@@ -14,21 +15,26 @@ public class User {
     private long id;
 
     @Column(name = "email", nullable = false)
+    @Size(min = 3)
     private String email;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
+    @Size(min = 3)
     private String password;
 
-    @Column(name = "first_name")
+    @Column(name = "first_name", nullable = false)
+    @Size(min = 3)
     private String firstName;
 
-    @Column(name = "last_name")
+    @Column(name = "last_name", nullable = false)
+    @Size(min = 3)
     private String lastName;
 
     @Column(name = "enabled")
     private boolean enabled;
 
-    @Column(name = "username")
+    @Column(name = "username", unique = true)
+    @Size(min = 3)
     private String username;
 
     @ManyToMany(fetch = FetchType.EAGER)

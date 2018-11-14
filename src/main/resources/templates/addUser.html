@@ -21,26 +21,17 @@
             <label for="inputFirstName">First Name:</label>
             <input th:field="*{firstName}" type="text" class="form-control" id="inputFirstName"
                    placeholder="First Name">
-
-            <!--First Name:-->
-            <!--<input type="text" th:field="*{firstName}"/>-->
-            <!--<span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span><br/>-->
+            <div th:if="${#fields.hasErrors('firstName')}" class="alert alert-danger" th:errors="*{firstName}"></div>
 
             <label for="inputLastName">Last Name:</label>
             <input th:field="*{lastName}" type="text" class="form-control" id="inputLastName"
                    placeholder="Last Name">
-
-            <!--Last Name:-->
-            <!--<input type="text" th:field="*{lastName}"/>-->
-            <!--<span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span><br/>-->
+            <div th:if="${#fields.hasErrors('lastName')}" class="alert alert-danger" th:errors="*{lastName}"></div>
 
             <label for="inputEmail">EMail:</label>
             <input th:field="*{email}" type="text" class="form-control" id="inputEmail"
                    placeholder="EMail">
-
-            <!--EMail:-->
-            <!--<input type="text" th:field="*{email}"/>-->
-            <!--<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span><br/>-->
+            <div th:if="${#fields.hasErrors('email')}" class="alert alert-danger" th:errors="*{email}"></div>
         </div>
 
         <hr/>
@@ -49,18 +40,12 @@
             <label for="inputUsername">Username:</label>
             <input th:field="*{username}" type="text" class="form-control" id="inputUsername"
                    placeholder="Username">
-
-            <!--Username:-->
-            <!--<input type="text" th:field="*{username}"/>-->
-            <!--<span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span><br/>-->
+            <div th:if="${#fields.hasErrors('username')}" class="alert alert-danger" th:errors="*{username}"></div>
 
             <label for="inputPassword">Password:</label>
             <input th:field="*{password}" type="password" class="form-control" id="inputPassword"
                    placeholder="Password">
-
-            <!--Password:-->
-            <!--<input type="text" th:field="*{password}"/>-->
-            <!--<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span><br/>-->
+            <div th:if="${#fields.hasErrors('password')}" class="alert alert-danger" th:errors="*{password}"></div>
         </div>
 
         <hr/>
