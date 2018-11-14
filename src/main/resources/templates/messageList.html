@@ -6,7 +6,7 @@
     <title>Messages</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+          inte      g       rity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
 <div th:replace="base :: menubar"></div>
@@ -16,7 +16,7 @@
 </div>
 
 <div class="container">
-    <h2 class="text-center py-3 pl-4 pr-5">List of Messages</h2>
+    <h2 class="text-center py-3 pl-4 pr-5">List of My Messages</h2>
 
     <div align="center">
         <table class="table table-hover">
@@ -44,6 +44,7 @@
     </div>
 
     <a class="btn btn-secondary" th:href="@{/addMessage}" role="button">New Message</a>
+    <a class="btn btn-secondary" th:href="@{/}" role="button">All Messages</a>
 </div>
 
 <div th:replace="base :: footer"></div>

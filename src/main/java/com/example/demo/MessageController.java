@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
 @Controller
@@ -27,7 +29,10 @@ public class MessageController {
     MessageRepository messageRepository;
 
     @RequestMapping("/")
-    public String index(Model model) {
+    public String index(Model model, Principal principal) {
+        User currentUser = principal != null ? userRepository.findByUsername(principal.getName()) : null;
+        model.addAttribute("user", currentUser);
+
         model.addAttribute("messages", messageRepository.findAll());
         return "index";
     }
@@ -61,21 +66,34 @@ public class MessageController {
 
     @RequestMapping("/messages")
     public String listMessages(Model model, Principal principal) {
-        model.addAttribute("user", userRepository.findByUsername(principal.getName()));
-        model.addAttribute("messages", messageRepository.findAll());
+        User currentUser = userRepository.findByUsername(principal.getName());
+        model.addAttribute("user", currentUser);
+
+        model.addAttribute("messages", messageRepository.findByOwner(currentUser));
+//        model.addAttribute("messages", messageRepository.findAll());
         return "messageList";
     }
 
     @GetMapping("/addMessage")
     public String addMessage(Model model, Principal principal) {
-        model.addAttribute("user", userRepository.findByUsername(principal.getName()));
-        model.addAttribute("message", new Message());
+        User currentUser = userRepository.findByUsername(principal.getName());
+        model.addAttribute("user", currentUser);
+
+        Message message = new Message();
+        message.setOwner(currentUser);
+        message.setDate(LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE));
+
+        model.addAttribute("message", message);
         return "addMessage";
     }
 
     @PostMapping("/processMessage")
-    public String processMessage(@Valid Message message, BindingResult result) {
+    public String processMessage(@Valid Message message, BindingResult result, Model model, Principal principal) {
         if (result.hasErrors()) {
+            // -- This is to prevent "Welcome null" message in the header
+            User currentUser = userRepository.findByUsername(principal.getName());
+            model.addAttribute("user", currentUser);
+
             return "addMessage";
         }
 

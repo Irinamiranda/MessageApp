@@ -18,11 +18,13 @@
           th:object="${message}"
           method="post">
         <input type="hidden" th:field="*{id}"/>
+        <input type="hidden" th:field="*{owner}"/>
 
         <div class="form-group">
             <label for="inputText">Enter message:</label>
             <textarea th:field="*{text}"
                       class="form-control" id="inputText" placeholder="Message Text" rows="4"></textarea>
+            <div th:if="${#fields.hasErrors('text')}" class="alert alert-danger" th:errors="*{text}"></div>
 
             <label for="inputDate">Post Date:</label>
             <input th:field="*{date}" type="date" class="form-control" id="inputDate">
@@ -30,6 +32,12 @@
             <label for="inputSentBy">Sent By:</label>
             <input th:field="*{sentBy}" type="text" class="form-control" id="inputSentBy">
         </div>
+
+        <label for="inputOwner">Owner:</label>
+        <input th:value="*{owner.firstName + ' ' + owner.lastName}" type="text" class="form-control" id="inputOwner"
+               disabled>
+
+        <hr/>
 
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
