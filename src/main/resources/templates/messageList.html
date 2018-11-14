@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Messages</title>
@@ -8,37 +9,7 @@
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
-<!-- Nav header -->
-<div>
-    <nav class="navbar navbar navbar-expand-lg navbar-light bg-dark">
-        <a class="navbar-brand text-white" href="/">Messaging App</a>
-
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="nav navbar-nav ml-auto">
-                <li class="nav-item text-light">
-                    <span class="nav-link text-white"
-                          th:text="${'Welcome, ' + user.firstName + '!'}"></span>
-                </li>
-
-                <li class="nav-item text-light active">
-                    <a class="nav-link text-white" href="/">Home</a>
-                </li>
-
-                <li class="nav-item text-light">
-                    <a class="nav-link text-white" href="/addMessage">New Message</a>
-                </li>
-                <li class="nav-item text-light">
-                    <a class="nav-link text-white" href="/logout">Logout</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-</div>
+<div th:replace="base :: menubar"></div>
 
 <div class="container">
     <h1 class="text-center">Welcome to Messaging App!</h1>
@@ -46,6 +17,7 @@
 
 <div class="container">
     <h2 class="text-center py-3 pl-4 pr-5">List of Messages</h2>
+
     <div align="center">
         <table class="table table-hover">
             <thead>
@@ -61,7 +33,7 @@
                 <td th:text="${message.text}"></td>
                 <td th:text="${message.sentBy}"></td>
                 <td th:text="${message.date}"></td>
-                <td>
+                <td sec:authorize="isAuthenticated()">
                     <a th:href="@{/update/{id}(id=${message.id})}">Update</a> -
                     <a th:href="@{/detail/{id}(id=${message.id})}">Details</a> -
                     <a th:href="@{/delete/{id}(id=${message.id})}">Delete</a>
@@ -70,14 +42,12 @@
             </tbody>
         </table>
     </div>
+
+    <a class="btn btn-secondary" th:href="@{/addMessage}" role="button">New Message</a>
 </div>
+
 <div th:replace="base :: footer"></div>
-<footer class="navbar navbar navbar-expand-lg navbar-light bg-dark fixed-bottom">
-    <span class="mr-auto"></span>
-    <div class="text-muted">
-        <h6>© 2018 Irina Smirnova</h6>
-    </div>
-</footer>
+
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

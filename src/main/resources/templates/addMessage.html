@@ -8,37 +8,7 @@
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
-<!-- Nav header -->
-<div>
-    <nav class="navbar navbar navbar-expand-lg navbar-light bg-dark">
-        <a class="navbar-brand text-white" href="/">Messaging App</a>
-
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="nav navbar-nav ml-auto">
-                <li class="nav-item text-light">
-                    <span class="nav-link text-white"
-                          th:text="${'Welcome, ' + user.firstName + ' ' + user.lastName + '!'}"></span>
-                </li>
-
-                <li class="nav-item text-light active">
-                    <a class="nav-link text-white" href="/">Home</a>
-                </li>
-
-                <li class="nav-item text-light">
-                    <a class="nav-link text-white" href="/addMessage">New Message</a>
-                </li>
-                <li class="nav-item text-light">
-                    <a class="nav-link text-white" href="/logout">Logout</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-</div>
+<div th:replace="base :: menubar"></div>
 
 <div class="container bg-light">
     <h2>Add New Message</h2>
@@ -56,9 +26,7 @@
 
             <label for="inputDate">Post Date:</label>
             <input th:field="*{date}" type="date" class="form-control" id="inputDate">
-        </div>
 
-        <div class="form-group">
             <label for="inputSentBy">Sent By:</label>
             <input th:field="*{sentBy}" type="text" class="form-control" id="inputSentBy">
         </div>
@@ -66,13 +34,8 @@
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
+
 <div th:replace="base :: footer"></div>
-<footer class="navbar navbar navbar-expand-lg navbar-light bg-dark fixed-bottom">
-    <span class="mr-auto"></span>
-    <div class="text-muted">
-        <h6>© 2018 Irina Smirnova</h6>
-    </div>
-</footer>
 
 </body>
 </html>

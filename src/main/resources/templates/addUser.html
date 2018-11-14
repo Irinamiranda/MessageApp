@@ -7,36 +7,67 @@
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
+<div th:replace="base :: menubar"></div>
 
-<form action="#"
-      th:action="@{/processUser}"
-      th:object="${user}"
-      method="post">
-    <input type="hidden" th:field="*{id}"/>
+<div class="container bg-light">
+    <h2>Register New User</h2>
 
-    First Name:
-    <input type="text" th:field="*{firstName}"/>
-    <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span><br/>
+    <form th:action="@{/processUser}"
+          th:object="${user}"
+          method="post">
+        <input type="hidden" th:field="*{id}"/>
 
-    Last Name:
-    <input type="text" th:field="*{lastName}"/>
-    <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span><br/>
+        <div class="form-group">
+            <label for="inputFirstName">First Name:</label>
+            <input th:field="*{firstName}" type="text" class="form-control" id="inputFirstName"
+                   placeholder="First Name">
 
-    EMail:
-    <input type="text" th:field="*{email}"/>
-    <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span><br/>
+            <!--First Name:-->
+            <!--<input type="text" th:field="*{firstName}"/>-->
+            <!--<span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span><br/>-->
 
-    Username:
-    <input type="text" th:field="*{username}"/>
-    <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span><br/>
+            <label for="inputLastName">Last Name:</label>
+            <input th:field="*{lastName}" type="text" class="form-control" id="inputLastName"
+                   placeholder="Last Name">
 
-    Password:
-    <input type="text" th:field="*{password}"/>
-    <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span><br/>
+            <!--Last Name:-->
+            <!--<input type="text" th:field="*{lastName}"/>-->
+            <!--<span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span><br/>-->
 
-    <br/>
-    <input type="submit" value="Submit"/>
-</form>
+            <label for="inputEmail">EMail:</label>
+            <input th:field="*{email}" type="text" class="form-control" id="inputEmail"
+                   placeholder="EMail">
+
+            <!--EMail:-->
+            <!--<input type="text" th:field="*{email}"/>-->
+            <!--<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span><br/>-->
+        </div>
+
+        <hr/>
+
+        <div class="form-group">
+            <label for="inputUsername">Username:</label>
+            <input th:field="*{username}" type="text" class="form-control" id="inputUsername"
+                   placeholder="Username">
+
+            <!--Username:-->
+            <!--<input type="text" th:field="*{username}"/>-->
+            <!--<span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span><br/>-->
+
+            <label for="inputPassword">Password:</label>
+            <input th:field="*{password}" type="password" class="form-control" id="inputPassword"
+                   placeholder="Password">
+
+            <!--Password:-->
+            <!--<input type="text" th:field="*{password}"/>-->
+            <!--<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span><br/>-->
+        </div>
+
+        <hr/>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
 
 <div th:replace="base :: footer"></div>
 </body>
