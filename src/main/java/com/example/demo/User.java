@@ -18,7 +18,7 @@ public class User {
     @Size(min = 3)
     private String email;
 
-    @Column(name ="intro", nullable=true)
+    @Column(name = "intro", nullable = true)
     private String intro;
 
     @Column(name = "password", nullable = false)
@@ -46,18 +46,16 @@ public class User {
     private Collection<Role> roles;
 
     public User() {
-
     }
 
-
-    public User(String email, String password, String firstName, String lastName, boolean enabled, String username) {
+    public User(String email, String password, String firstName, String lastName, boolean enabled, String username, String intro) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.enabled = enabled;
         this.username = username;
-
+        this.intro = intro;
     }
 
     public long getId() {
@@ -131,5 +129,10 @@ public class User {
 
     public void setIntro(String intro) {
         this.intro = intro;
+    }
+
+    public String getGravatarUrl() {
+        String hash = MD5Util.md5Hex(this.email.trim().toLowerCase());
+        return String.format("https://www.gravatar.com/avatar/%s/?d=identicon", hash);
     }
 }

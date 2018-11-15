@@ -45,17 +45,23 @@ public class MessageController {
     @GetMapping("/register")
     public String addUser(Model model) {
         User user = new User();
+
+        Role userRole = roleRepository.findByRole("USER");
+        user.setRoles(Arrays.asList(userRole));
+        user.setEnabled(true);
+
         model.addAttribute("user", user);
         return "addUser";
     }
 
     @RequestMapping("/updateProfile/{id}")
-    public String updateProfile(@PathVariable("id") long id, Model model, Principal principal){
+    public String updateProfile(@PathVariable("id") long id, Model model, Principal principal) {
         model.addAttribute("user", userRepository.findByUsername(principal.getName()));
         return "addUser";
     }
+
     @RequestMapping("/detailProfile/{id}")
-    public String showProfile(@PathVariable("id") long id, Model model, Principal principal){
+    public String showProfile(@PathVariable("id") long id, Model model, Principal principal) {
         model.addAttribute("user", userRepository.findByUsername(principal.getName()));
         return "showProfile";
     }
@@ -66,13 +72,8 @@ public class MessageController {
             return "addUser";
         }
 
-        Role userRole = roleRepository.findByRole("USER");
-        user.setRoles(Arrays.asList(userRole));
-
-        user.setEnabled(true);
-
         userRepository.save(user);
-        return "redirect:/login";
+        return "redirect:/";
     }
 
     @RequestMapping("/messages")
@@ -111,21 +112,22 @@ public class MessageController {
         messageRepository.save(message);
         return "redirect:/messages";
     }
+
     @RequestMapping("/detail/{id}")
-    public String showMessage(@PathVariable("id") long id, Model model){
+    public String showMessage(@PathVariable("id") long id, Model model) {
         model.addAttribute("message", messageRepository.findById(id).get());
         return "show";
     }
 
     @RequestMapping("/update/{id}")
-    public String updateMessage(@PathVariable("id") long id, Model model, Principal principal){
+    public String updateMessage(@PathVariable("id") long id, Model model, Principal principal) {
         model.addAttribute("user", userRepository.findByUsername(principal.getName()));
         model.addAttribute("message", messageRepository.findById(id).get());
         return "addMessage";
     }
 
     @RequestMapping("/delete/{id}")
-    public String delMessage(@PathVariable("id") long id){
+    public String delMessage(@PathVariable("id") long id) {
         messageRepository.deleteById(id);
         return "redirect:/messages";
     }
