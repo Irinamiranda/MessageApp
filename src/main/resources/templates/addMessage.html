@@ -29,11 +29,11 @@
             <label for="inputDate">Post Date:</label>
             <input th:field="*{date}" type="date" class="form-control" id="inputDate">
 
-            <label for="inputSentBy">Sent By:</label>
-            <input th:field="*{sentBy}" type="text" class="form-control" id="inputSentBy">
+            <!--<label for="inputSentBy">Sent By:</label>-->
+            <!--<input th:field="*{sentBy}" type="text" class="form-control" id="inputSentBy">-->
         </div>
 
-        <label for="inputOwner">Owner:</label>
+        <label for="inputOwner">Sent By:</label>
         <input th:value="*{owner.firstName + ' ' + owner.lastName}" type="text" class="form-control" id="inputOwner"
                disabled>
 

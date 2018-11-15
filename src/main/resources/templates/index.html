@@ -41,7 +41,11 @@
             <tbody>
             <tr th:each="message: ${messages}">
                 <td th:text="${message.text}"></td>
-                <td th:text="${message.sentBy}"></td>
+                <td sec:authorize="isAnonymous()" th:text="${message.owner.firstName + ' ' + message.owner.lastName}"></td>
+                <td sec:authorize="isAuthenticated()">
+                    <a th:href="@{/detailProfile/{id}(id=${message.owner.id})}"
+                       th:text="${message.owner.firstName + ' ' + message.owner.lastName}"></a>
+                </td>
                 <td th:text="${message.date}"></td>
                 <td sec:authorize="isAuthenticated()">
                     <a th:href="@{/detail/{id}(id=${message.id})}">Details</a>

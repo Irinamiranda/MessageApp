@@ -18,6 +18,9 @@ public class User {
     @Size(min = 3)
     private String email;
 
+    @Column(name ="intro", nullable=true)
+    private String intro;
+
     @Column(name = "password", nullable = false)
     @Size(min = 3)
     private String password;
@@ -120,5 +123,13 @@ public class User {
 
     public void setRoles(Collection<Role> roles) {
         this.roles = roles;
+    }
+
+    public String getIntro() {
+        return intro;
+    }
+
+    public void setIntro(String intro) {
+        this.intro = intro;
     }
 }

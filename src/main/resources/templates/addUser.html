@@ -32,6 +32,11 @@
             <input th:field="*{email}" type="text" class="form-control" id="inputEmail"
                    placeholder="EMail">
             <div th:if="${#fields.hasErrors('email')}" class="alert alert-danger" th:errors="*{email}"></div>
+
+            <label for="inputIntro">Introduction:</label>
+            <textarea th:field="*{intro}"
+                      class="form-control" id="inputIntro" placeholder="Introduction Text" rows="4"></textarea>
+            <div th:if="${#fields.hasErrors('intro')}" class="alert alert-danger" th:errors="*{intro}"></div>
         </div>
 
         <hr/>
