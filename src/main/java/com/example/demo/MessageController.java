@@ -55,15 +55,15 @@ public class MessageController {
         return "addUser";
     }
 
-    @RequestMapping("/updateProfile/{id}")
-    public String updateProfile(@PathVariable("id") long id, Model model, Principal principal) {
+    @RequestMapping("/updateProfile")
+    public String updateProfile(Model model, Principal principal) {
         model.addAttribute("user", userRepository.findByUsername(principal.getName()));
         return "addUser";
     }
 
     @RequestMapping("/detailProfile/{id}")
     public String showProfile(@PathVariable("id") long id, Model model, Principal principal) {
-        model.addAttribute("user", userRepository.findByUsername(principal.getName()));
+        model.addAttribute("user", userRepository.findById(id).get());
         return "showProfile";
     }
 
