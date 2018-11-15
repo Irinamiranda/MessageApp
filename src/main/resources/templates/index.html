@@ -26,7 +26,11 @@
 </div>
 
 <div class="container">
-    <h2 class="text-center py-3 pl-4 pr-5">All Messages</h2>
+    <h3 th:if="${hashtag}" class="text-center py-3 pl-4 pr-5">
+        Tagged Messages
+        <span class="badge badge-info" th:text="${hashtag}"></span>
+    </h3>
+    <h3 th:unless="${hashtag}" class="text-center py-3 pl-4 pr-5">All Messages</h3>
 
     <div align="center">
         <table class="table table-hover">
@@ -55,7 +59,8 @@
                 <td th:text="${message.date}"></td>
                 <td>
                     <span th:each="hashtag: ${message.hashtags.split(',')}">
-                        <a class="badge badge-info" th:text="${hashtag}" href="#"></a>
+                        <a class="badge badge-info" th:text="${hashtag}"
+                           th:href="@{/tagged/{ht}(ht=${hashtag})}"></a>
                     </span>
                 </td>
                 <td sec:authorize="isAuthenticated()">
@@ -75,6 +80,7 @@
         My Messages
     </a>
     <a class="btn btn-secondary" th:href="@{/addMessage}" role="button">New Message</a>
+    <a th:if="${hashtag}" class="btn btn-secondary" th:href="@{/}" role="button">All Messages</a>
 </div>
 
 <div th:replace="base :: footer"></div>

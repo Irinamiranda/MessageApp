@@ -1,7 +1,6 @@
 package com.example.demo;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,7 +13,9 @@ import javax.validation.Valid;
 import java.security.Principal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 @Controller
 public class MessageController {
@@ -82,8 +83,25 @@ public class MessageController {
         model.addAttribute("user", currentUser);
 
         model.addAttribute("messages", messageRepository.findByOwner(currentUser));
-//        model.addAttribute("messages", messageRepository.findAll());
         return "messageList";
+    }
+
+    @RequestMapping("/tagged/{hashtag}")
+    public String taggedMessages(@PathVariable("hashtag") String hashtag, Model model, Principal principal) {
+        User currentUser = principal != null ? userRepository.findByUsername(principal.getName()) : null;
+        model.addAttribute("user", currentUser);
+
+        model.addAttribute("hashtag", hashtag);
+
+        ArrayList<Message> messages = new ArrayList<>();
+        for (Message message : messageRepository.findAll()) {
+            List<String> hashtags = Arrays.asList(message.getHashtags().split(","));
+            if (hashtags.contains(hashtag)) {
+                messages.add(message);
+            }
+        }
+        model.addAttribute("messages", messages);
+        return "index";
     }
 
     @GetMapping("/addMessage")

@@ -14,7 +14,7 @@ public class Message {
     private String text;
     private String date;
     private String sentBy;
-    private String hashtags;
+    private String hashtags = "";
 
     @ManyToOne
     private User owner;
