@@ -36,6 +36,7 @@
                 <th scope="col"></th>
                 <th scope="col">Sent By</th>
                 <th scope="col">Date</th>
+                <th scope="col">#Tags</th>
                 <th scope="col"></th>
             </tr>
             </thead>
@@ -45,12 +46,18 @@
                 <td>
                     <img th:src="*{message.owner.getGravatarUrl() + '&s=24'}"/>
                 </td>
-                <td sec:authorize="isAnonymous()" th:text="${message.owner.firstName + ' ' + message.owner.lastName}"></td>
+                <td sec:authorize="isAnonymous()"
+                    th:text="${message.owner.firstName + ' ' + message.owner.lastName}"></td>
                 <td sec:authorize="isAuthenticated()">
                     <a th:href="@{/detailProfile/{id}(id=${message.owner.id})}"
                        th:text="${message.owner.firstName + ' ' + message.owner.lastName}"></a>
                 </td>
                 <td th:text="${message.date}"></td>
+                <td>
+                    <span th:each="hashtag: ${message.hashtags.split(',')}">
+                        <a class="badge badge-info" th:text="${hashtag}" href="#"></a>
+                    </span>
+                </td>
                 <td sec:authorize="isAuthenticated()">
                     <a th:href="@{/detail/{id}(id=${message.id})}">Details</a>
                     <a sec:authorize="hasAuthority('USER')" th:if="${message.owner == user}"

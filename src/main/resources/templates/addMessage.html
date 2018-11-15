@@ -33,6 +33,11 @@
             <!--<input th:field="*{sentBy}" type="text" class="form-control" id="inputSentBy">-->
         </div>
 
+        <div class="form-group">
+            <label for="inputHashtags">Hashtags:</label>
+            <input th:field="*{hashtags}" type="text" class="form-control" id="inputHashtags">
+        </div>
+
         <label for="inputOwner">Sent By:</label>
         <input th:value="*{owner.firstName + ' ' + owner.lastName}" type="text" class="form-control" id="inputOwner"
                disabled>

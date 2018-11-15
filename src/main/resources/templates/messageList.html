@@ -26,6 +26,7 @@
                 <th scope="col"></th>
                 <th scope="col">Sent By</th>
                 <th scope="col">Date</th>
+                <th scope="col">#Tags</th>
                 <th scope="col"></th>
             </tr>
             </thead>
@@ -38,6 +39,11 @@
                        th:text="${message.owner.firstName + ' ' + message.owner.lastName}"></a>
                 </td>
                 <td th:text="${message.date}"></td>
+                <td>
+                    <span th:each="hashtag: ${message.hashtags.split(',')}">
+                        <a class="badge badge-info" th:text="${hashtag}" href="#"></a>
+                    </span>
+                </td>
                 <td sec:authorize="isAuthenticated()">
                     <a th:href="@{/update/{id}(id=${message.id})}">Update</a> -
                     <a th:href="@{/detail/{id}(id=${message.id})}">Details</a> -

@@ -14,6 +14,7 @@ public class Message {
     private String text;
     private String date;
     private String sentBy;
+    private String hashtags;
 
     @ManyToOne
     private User owner;
@@ -48,6 +49,14 @@ public class Message {
 
     public void setSentBy(String sentBy) {
         this.sentBy = sentBy;
+    }
+
+    public String getHashtags() {
+        return hashtags;
+    }
+
+    public void setHashtags(String hashtags) {
+        this.hashtags = hashtags;
     }
 
     public User getOwner() {
