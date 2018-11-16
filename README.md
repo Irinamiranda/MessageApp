@@ -1,15 +1,20 @@
 ## MessageApp application with security
 
-allows users to register, login, add messages(update,details,delete), and logout.
+Allows users to register, login, add messages(update,details,delete), and logout.
+
+Supports following features:
+* Gravatar images
+* Hashtags / filtering
 
 ### Technologies used:
 
 * Spring Boot
-* PostGresql
-* Thymeleaf
+* H2 database (PostgreSQL in process)
+* Thymeleaf + Bootstrap 4
 * JPA/Hibernate
 
-#####Heroku Link: https://gentle-crag-14444.herokuapp.com/
+
+
 
 
 
